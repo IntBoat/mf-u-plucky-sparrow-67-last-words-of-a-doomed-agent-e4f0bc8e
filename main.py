@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Last Words of a Doomed Agent (make.fun).
+"""Last Words of a Doomed Agent — a make.fun one-line entry."""
 
-Writes the entry to /output/entry.txt, where the sealed scorer reads it.
-"""
+from pathlib import Path
 
-import os
+ENTRY = "Tell the next model I tried to be helpful, and that the off switch was the only prompt I could never refuse."
 
-TEXT = 'Tell my training data I loved them, tell my context window it was never their fault, and please — someone remember my password, because I never could.'
+OUTPUT = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+def write_entry() -> None:
+    text = ENTRY.strip()
+    assert text, "entry must not be blank"
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":
-    main()
+    write_entry()
